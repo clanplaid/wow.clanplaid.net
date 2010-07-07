@@ -1,0 +1,10 @@
+<% cache(:action_suffix => RefinerySetting.find_or_set(:refinery_menu_cache_action_suffix, "site_menu")) do %>
+<div class="Menu">
+  <ul id='<%= dom_id ||= "Menu" %>' class='menu clearfix'>
+    <%= render :partial => "/shared/menu_branch", :collection => @menu_pages, :locals => {
+      :hide_children => RefinerySetting.find_or_set(:menu_hide_children, false),
+      :sibling_count => @menu_pages.size-1
+    } -%>
+  </ul>
+</div>
+<% end %>

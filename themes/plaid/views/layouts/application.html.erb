@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<%= render :partial => "/shared/head", :locals => {:theme => true} %>
+	<body>
+    <%= render :partial => "/shared/ie6check" if request.env['HTTP_USER_AGENT'] =~ /MSIE/ -%>
+		<div id="ev_bg">
+		  <div id="everything">
+		    <div id="header">
+		    </div>
+		    <div id="middle">
+		        <%= yield %>
+			    <div id="sidebar">
+					<%= render :partial => "/shared/header" %>
+				</div>
+		  </div>
+			<div id="Foot">
+				<div id="subnav"><a href="http://wow.clanplaid.net/">Home</a> 
+					             | <a href="http://wow.clanplaid.net/v/index.php">Barrens Chat</a> 
+									     | <a href="http://wow.clanplaid.net/pages/about-us">About Us</a> 
+					<div class="credits">
+						Site powered by Ruby on Rails
+					</div>
+				</div>									
+		    <p><span class="copyright">World of Warcraft&reg; and Blizzard Entertainment&reg; are all trademarks or registered trademarks of Blizzard Entertainment in the United States and/or other countries. <br> These terms and all related materials, logos, and images are copyright &copy; Blizzard Entertainment. This site is in no way associated with or endorsed by Blizzard Entertainment&reg;.</span></p>
+		    <%= render :partial => "/shared/footer" %>
+		    </div>
+		  </div>
+		</div>
+	</body>
+</html>
