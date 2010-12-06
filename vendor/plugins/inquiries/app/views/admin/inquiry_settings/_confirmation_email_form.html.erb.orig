@@ -1,0 +1,98 @@
+<<<<<<< HEAD
+<%= error_messages_for :inquiry_setting %>
+<% form_for [:admin, @inquiry_setting] do |f| %>
+  <p>
+    Every time someone contacts you on your website, Refinery sends
+    out an email to confirm the inquiry with the person who made it.
+  </p>
+  <p>
+    Below you can edit the email that is sent out.
+=======
+<% form_for([:admin, @inquiry_setting], :url => (@url_override || @url)) do |f| %>
+  <%= f.error_messages %>
+  <p>
+    <%= t('.explanation') %>
+  </p>
+  <p>
+    <%= t('.below_edit_email_sent') %>
+>>>>>>> upstream/rails2-stable
+  </p>
+  <table id='inquiry'>
+    <tr>
+      <td>
+<<<<<<< HEAD
+        <strong>To</strong>
+      </td>
+      <td>
+        The customer making the inquiry
+=======
+        <label class='stripped'><%= t('.to') %></label>
+      </td>
+      <td>
+        <%= t('.the_customer_making_inquiry') %>
+>>>>>>> upstream/rails2-stable
+      </td>
+    </tr>
+    <tr>
+      <td>
+<<<<<<< HEAD
+        <strong>From</strong>
+=======
+        <label class='stripped'><%= t('.from') %></label>
+>>>>>>> upstream/rails2-stable
+      </td>
+      <td>
+        <%= "#{RefinerySetting[:site_name]} &lt;no-reply@#{request.domain(RefinerySetting.find_or_set(:tld_length, 1))}&gt;" %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+<<<<<<< HEAD
+        <strong>Subject</strong>
+      </td>
+      <td>
+        Thank you for your inquiry
+=======
+        <label class='stripped'><%= t('.subject') %></label>
+      </td>
+      <td>
+        <%= link_to InquirySetting.confirmation_subject.value, edit_admin_inquiry_setting_url(InquirySetting.confirmation_subject),
+            :title => t('.click_to_edit_subject') %>
+>>>>>>> upstream/rails2-stable
+      </td>
+    </tr>
+    <tr>
+      <td valign='top'>
+<<<<<<< HEAD
+        <strong>Message</strong>
+      </td>
+      <td>
+        <%= f.text_area :value, :cols => "100", :rows => "5" %><br/>
+        <em>Note: place the text %name% where you'd like the customer's name to appear in the email</em>
+      </td>
+    </tr>
+  </table>
+  <%= render :partial => "/shared/admin/form_actions", :locals => {:f => f, :continue_editing => false, :cancel_url => admin_inquiries_url} %>
+=======
+        <%= f.label :value, t('.message'),
+                    :class => 'stripped' %>
+      </td>
+      <td>
+        <%= f.text_area :value,
+                        :rows => "5",
+                        :class => 'widest' %>
+        <br/>
+        <em><%= t('.note') %></em>
+      </td>
+    </tr>
+  </table>
+
+  <%= render :partial => "/shared/admin/form_actions",
+             :locals => {
+               :f => f,
+               :continue_editing => false,
+               :cancel_url => admin_inquiries_url,
+               :hide_delete => true
+             } %>
+>>>>>>> upstream/rails2-stable
+<% end %>

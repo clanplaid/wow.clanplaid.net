@@ -1,0 +1,10 @@
+ActionController::Routing::Routes.draw do |map|
+<<<<<<< HEAD
+  map.namespace(:admin) do |admin|
+=======
+  map.namespace(:admin, :path_prefix => 'refinery') do |admin|
+>>>>>>> upstream/rails2-stable
+    admin.resources :dashboard
+    admin.disable_upgrade_message 'disable_upgrade_message', :controller => 'dashboard', :action => 'disable_upgrade_message'
+  end
+end

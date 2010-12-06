@@ -2,23 +2,31 @@ class Admin::InquiriesController < Admin::BaseController
 
   crudify :inquiry, :title_attribute => "name", :order => "created_at DESC"
 
-  before_filter :find_inquiry, :only => [:show, :toggle_status, :destroy]
-  before_filter :find_all_inquiries, :only => [:index]
+  before_filter :get_spam_count, :only => [:index, :spam]
 
-  def toggle_status
-    @inquiry.toggle!(:open)
+  def index
+    @inquiries = Inquiry.ham.with_query(params[:search]) if searching?
 
-    flash[:notice] = "'#{@inquiry.name}' has been #{@inquiry.open? ? "reopened" : "closed"}"
+    @grouped_inquiries = group_by_date(Inquiry.ham)
+  end
 
-    redirect_to :action => 'index'
+  def spam
+    @inquiries = Inquiry.spam.with_query(params[:search]) if searching?
+
+    @grouped_inquiries = group_by_date(Inquiry.spam)
+  end
+
+  def toggle_spam
+    find_inquiry
+    @inquiry.toggle!(:spam)
+
+    redirect_to :back
   end
 
 protected
 
-  def find_all_inquiries
-    @open_inquiries = Inquiry.open
-    @closed_inquiries = Inquiry.closed
-    @inquiries = @open_inquiries
+  def get_spam_count
+    @spam_count = Inquiry.count(:conditions => {:spam => true})
   end
 
 end

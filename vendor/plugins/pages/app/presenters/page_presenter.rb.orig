@@ -1,0 +1,11 @@
+class PagePresenter < Refinery::BasePresenter
+<<<<<<< HEAD
+  #delegate DEFAULT_FIELDS.keys :to => :model
+=======
+
+  def custom_title_type
+    @model.custom_title_type
+  end
+
+>>>>>>> upstream/rails2-stable
+end

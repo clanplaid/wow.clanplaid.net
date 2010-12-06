@@ -33,39 +33,39 @@ class User < ActiveRecord::Base
 
   #-------------------------------------------------------------------------------------------------
 
-  serialize :plugins_column # Array # this is seriously deprecated and will be removed later.
-
+  has_and_belongs_to_many :roles
   has_many :plugins, :class_name => "UserPlugin", :order => "position ASC"
+  has_friendly_id :login, :use_slug => true
 
-  def plugins=(plugin_titles)
+  def plugins=(plugin_names)
     unless self.new_record? # don't add plugins when the user_id is NULL.
       self.plugins.delete_all
 
-      plugin_titles.each do |plugin_title|
-        self.plugins.find_or_create_by_title(plugin_title) if plugin_title.is_a?(String)
+      plugin_names.each_with_index do |plugin_name, index|
+        self.plugins.create(:name => plugin_name, :position => index) if plugin_name.is_a?(String)
       end
     end
   end
 
   def authorized_plugins
-    self.plugins.collect {|p| p.title} | Refinery::Plugins.always_allowed.titles
+    self.plugins.collect { |p| p.name } | Refinery::Plugins.always_allowed.names
   end
 
-  def can_delete?(other_user = self)
-    !other_user.superuser and User.count > 1 and (other_user.nil? or self.id != other_user.id)
+  def can_delete?(user_to_delete = self)
+    !user_to_delete.new_record? and
+      !user_to_delete.has_role?(:superuser) and
+      Role[:refinery].users.count > 1 and
+      self.id != user_to_delete.id
   end
 
-protected
-
-  # before filter
-  def encrypt_password
-    return if password.blank?
-    self.password_salt = Digest::SHA1.hexdigest("--#{Time.now.to_s}--#{login}--") if new_record?
-    self.crypted_password = encrypt(password)
+  def add_role(title)
+    raise ArgumentException, "Role should be the title of the role not a role object." if title.is_a?(Role)
+    self.roles << Role[title] unless self.has_role?(title)
   end
 
-  def password_required?
-    crypted_password.blank? || !password.blank?
+  def has_role?(title)
+    raise ArgumentException, "Role should be the title of the role not a role object." if title.is_a?(Role)
+    (role = Role.find_by_title(title.to_s.camelize)).present? and self.roles.collect{|r| r.id}.include?(role.id)
   end
 
 end

@@ -1,13 +1,16 @@
+<% content_for :header, t('.there_are_no_users') %>
 <p>
-  <strong>There are no users yet, so we'll set you up first.</strong>
+  <%=t('.remember_admin_location')%>
 </p>
 <p>
-  Remember your Refinery admin area is at:
+  <strong>http://<%= request.host %>/refinery</strong>
 </p>
 <p>
-  <strong>http://<%= request.host %>/admin</strong>
+  <%= t('.lets_start') %>
 </p>
-<p>
-  Alright, let's get you set up so you can log in...
-</p>
-<%= button_to "Continue...", new_user_url %>
+
+<div class='form-actions'>
+  <div class='form-actions-left'>
+    <%= button_to t('.continue'), new_user_url %>
+  </div>
+</div>

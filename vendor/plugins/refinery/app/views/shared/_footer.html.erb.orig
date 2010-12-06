@@ -1,0 +1,13 @@
+<<<<<<< HEAD
+<div id='footer_content'>
+  <p>
+    Copyright &copy; <%= Time.now.year %> <%= RefinerySetting[:site_name] %>
+  </p>
+</div>
+=======
+<footer>
+  <p>
+    Copyright &copy; <%= Time.now.year %> <%= RefinerySetting[:site_name] %>
+  </p>
+</footer>
+>>>>>>> upstream/rails2-stable

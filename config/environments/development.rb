@@ -1,4 +1,5 @@
 # Settings specified here will take precedence over those in config/environment.rb
+config.reload_plugins = true
 
 config.reload_plugins = true
 

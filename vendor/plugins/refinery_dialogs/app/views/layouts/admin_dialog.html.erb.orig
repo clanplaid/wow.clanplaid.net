@@ -1,0 +1,25 @@
+<<<<<<< HEAD
+<% use_caching = RefinerySetting.find_or_set(:use_resource_caching, false) -%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <%= render :partial => "/admin/head" %>
+  <body id='dialog_container' class='dialog'>
+    <div id="flash_container">
+      <%= render :partial => '/shared/message' %>
+    </div>
+    <%= yield %>
+=======
+<!DOCTYPE html>
+<html>
+  <%= render :partial => "/admin/head" %>
+  <body id='dialog_container' class='dialog'>
+    <div id='tooltip_container'></div>
+    <div id="flash_container">
+      <%= render :partial => '/shared/message' %>
+    </div>
+    <div id='content' class='clearfix'>
+      <%= yield %>
+    </div>
+>>>>>>> upstream/rails2-stable
+  </body>
+</html>

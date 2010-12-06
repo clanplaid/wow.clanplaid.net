@@ -1,10 +1,10 @@
 # this page links to the inquiries plugin through a custom link_url
 contact_us:
-  title: Contact Us
+  title: Contact
   position: 4
   show_in_menu: true
-  link_url: /inquiries/new
-  menu_match: ^/inquiries.*$
+  link_url: /contact
+  menu_match: ^/(inquiries|contact).*$
   deletable: true
 
 # A child page that is hidden
@@ -12,7 +12,7 @@ thank_you:
   title: Thank You
   position: 5
   show_in_menu: false
-  menu_match: ^/inquiries/thank_you$
+  menu_match: ^/(inquiries|contact)/thank_you$
   deletable: true
   parent: contact_us
 

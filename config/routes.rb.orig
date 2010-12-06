@@ -1,0 +1,36 @@
+ActionController::Routing::Routes.draw do |map|
+  map.filter(:locale)
+
+  # NB: Engine routes are loaded FIRST from Rails v2.3 onward.
+  # These routes are contained within vendor/plugins/engine_name/config/routes.rb
+
+  # The priority is based upon order of creation: first created -> highest priority.
+  map.root :controller => "pages", :action => "home"
+
+<<<<<<< HEAD
+  map.namespace(:admin) do |admin|
+=======
+  map.namespace(:admin, :path_prefix => 'refinery') do |admin|
+>>>>>>> upstream/rails2-stable
+    admin.root :controller => 'dashboard', :action => 'index'
+  end
+
+  # Install the default routes as the lowest priority.
+  map.connect ':controller/:action/:id'
+  map.connect ':controller/:action/:id.:format'
+<<<<<<< HEAD
+
+  map.connect 'admin/*path', :controller => 'admin/base', :action => 'error_404'
+  map.connect '*path', :controller => 'application', :action => 'error_404'
+
+=======
+
+
+  map.redirect 'admin/*path', :controller => 'admin/base'
+  map.connect 'refinery/*path', :controller => 'admin/base', :action => 'error_404'
+
+  # Marketable URLs
+  map.connect '*path', :controller => 'pages', :action => 'show'
+
+>>>>>>> upstream/rails2-stable
+end

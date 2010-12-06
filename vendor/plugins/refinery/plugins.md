@@ -12,7 +12,7 @@ The Refinery generator is a standard Rails generator that functions just like th
 
 To see how to use the generator run
 
-    ruby script/generate refinery
+    ruby script/generate refinery_plugin
 
 Usage instructions should appear.
 
@@ -24,11 +24,11 @@ First decide what fields they need to manage. In our case, the client is going t
 
 So go to the root of your project and run
 
-    ruby script/generate refinery
+    ruby script/generate refinery_plugin
 
 This will output the help on how to use the generator. To generate the new section we want to manage products we run:
 
-    ruby script/generate refinery product title:string description:text facts:text
+    ruby script/generate refinery_plugin product title:string description:text image:image brochure:resource
 
 The generator will output a list of files it generated. You'll notice there is a new plugin that has been added in ``vendor/plugins/products``. This is where both the backend and front end files are held for this new products area.
 
@@ -38,7 +38,7 @@ A new database migration has been added to add the products table in so run:
 
 Start up your app by running ``ruby script/server`` go to [http://localhost:3000](http://localhost:3000) and you'll see instantly a new menu item called "products". Click on that and you'll see there are no products yet.
 
-Now go to the backend of your site by visiting [http://localhost:3000/admin](http://localhost:3000/admin) and logging in. You'll see a new tab called "Products", click on that and then click "Add a new product", fill the form and add an example product. Now go back to the front end and you'll see your product is showing up in the products part of your site.
+Now go to the backend of your site by visiting [http://localhost:3000/refinery](http://localhost:3000/refinery) and logging in. You'll see a new tab called "Products", click on that and then click "Add a new product", fill the form and add an example product. Now go back to the front end and you'll see your product is showing up in the products part of your site.
 
 Now you have a fully managed products section in Refinery, nice.
 
@@ -91,9 +91,9 @@ This bit is important. It's where all the controllers are held to manage pages i
 
     end
 
-This single controller allows us to create, read, update and delete pages in the backend. With a little bit of Refinery magic we utilise the [crudify mixin](http://github.com/resolve/refinerycms/blob/master/vendor/plugins/refinery/crud.md) which gives us all of these regular features out of the box.
+This single controller allows us to create, read, update and delete pages in the backend. With a little bit of Refinery magic we utilise the [crudify mixin](http://github.com/resolve/refinerycms/blob/rails2-stable/vendor/plugins/refinery/crud.md) which gives us all of these regular features out of the box.
 
-How crudify works is an entire topic of it's own. Checkout the [crudify documentation](http://github.com/resolve/refinerycms/blob/master/vendor/plugins/refinery/crud.md) to get an insight into how that works.
+How crudify works is an entire topic of it's own. Checkout the [crudify documentation](http://github.com/resolve/refinerycms/blob/rails2-stable/vendor/plugins/refinery/crud.md) to get an insight into how that works.
 
 ### app/views and app/helpers
 
@@ -111,7 +111,7 @@ This file runs when your site is started up. All is does is registers this plugi
       plugin.title = "Pages"
       plugin.description = "Manage content pages"
       plugin.version = 1.0
-      plugin.menu_match = /admin\/page(_dialog|part)?s$/
+      plugin.menu_match = /(refinery|admin)\/page(_dialog|part)?s$/
       plugin.activity = {
         :class => Page,
         :url_prefix => "edit_",
@@ -131,7 +131,7 @@ In our example above we showed the use of ``plugin.activity`` for the pages plug
       plugin.title = "Pages"
       plugin.description = "Manage content pages"
       plugin.version = 1.0
-      plugin.menu_match = /admin\/page(_dialog|part)?s$/
+      plugin.menu_match = /(refinery|admin)\/page(_dialog|part)?s$/
       plugin.activity = {
         :class => Page,
         :url_prefix => "edit_",
@@ -149,9 +149,9 @@ Here's what the different activity options mean:
     # the name of the class we're watching.
 
     :url_prefix
-    # Just use "_edit" if you're not sure how this works.
+    # Just use "edit_" if you're not sure how this works.
     #
-    # When it says "'About Us' page was updated about 4 hours ago", the page title "About Us"
+    # When it says "'About' page was updated about 4 hours ago", the page title "About"
     # is linked to that page in a way we specify.  So by setting "_edit" as a :url_prefix what
     # we're doing is making it link to the page that allows us to edit this page.
     # So the next result is edit_admin_page_url(page)
@@ -190,7 +190,7 @@ Refinery uses a standards compliant visual editor called [WYMeditor](http://www.
 
 _Note: When using the Refinery generator, if you apply a field type of "text" to any of your fields, they automatically load as a WYMEditor._
 
-The WYSIWYG editor can only be applied to a ``textarea``. All you need to do is add a class of "wymeditor" to a ``textarea`` in your form and a WYSIWYG WYMEditor will load right in place.
+The WYSIWYG editor can only be applied to a ``textarea``. All you need to do is add a class of "wymeditor widest" to a ``textarea`` in your form and a WYSIWYG WYMEditor will load right in place.
 
 ### Example
 
@@ -200,6 +200,6 @@ Again going back to our product plugin example if you had this in your ``vendor/
 
 Just change that to:
 
-    <%= f.text_area :description, :class => "wymeditor" %>
+    <%= f.text_area :description, :class => "wymeditor widest" %>
 
 Refresh and you're done.

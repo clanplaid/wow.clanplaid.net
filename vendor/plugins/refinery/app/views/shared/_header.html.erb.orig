@@ -1,0 +1,11 @@
+<<<<<<< HEAD
+<div id='header_content'>
+  <h1><%= link_to RefinerySetting[:site_name], root_url %></h1>
+  <%= render :partial => "/shared/menu" %>
+</div>
+=======
+<header>
+  <h1><%= link_to RefinerySetting[:site_name], root_url(:only_path => true) %></h1>
+  <%= render :partial => "/shared/menu" %>
+</header>
+>>>>>>> upstream/rails2-stable

@@ -1,0 +1,65 @@
+<div id='actions'>
+  <ul>
+    <li>
+      <%= render :partial => "/shared/admin/search", :locals => {:url => admin_resources_url} %>
+    </li>
+    <li>
+<<<<<<< HEAD
+      <%= link_to "Upload New File", new_admin_resource_url(:dialog => true, :width => 600, :height => 300), :class => "add_icon" %>
+    </li>
+  </ul>
+</div>
+<div id='records'>
+  <% if searching? %>
+    <h2>Search Results for "<%= params[:search] %>"</h2>
+    <% if @resources.any? %>
+        <%= render :partial => "resource", :collection => @resources %>
+    <% else %>
+      <p>Sorry, no results found.</p>
+=======
+      <%= link_to t('.upload_new'), new_admin_resource_url(:dialog => true, :width => 600, :height => 300), :class => "add_icon" %>
+    </li>
+  </ul>
+</div>
+<div id='records' class='files'>
+  <% if searching? %>
+    <h2><%= t('admin.search_results_for', :query => h(params[:search])) %></h2>
+    <% if @resources.any? %>
+        <%= render :partial => "resource", :collection => @resources %>
+    <% else %>
+      <p><%= t('admin.search_no_results') %></p>
+>>>>>>> upstream/rails2-stable
+    <% end %>
+  <% else %>
+    <% if @resources.any? -%>
+      <%= will_paginate @resources, :previous_label => '&laquo;', :next_label => '&raquo;' %>
+      <% if RefinerySetting.find_or_set(:group_resources_by_date_uploaded, true) %>
+        <% @grouped_resources.each do |container| %>
+<<<<<<< HEAD
+          <h3><%= (resource_group = container.last).first.created_at.strftime("%A, %d %B %Y") %></h3>
+=======
+        <% date_time = (resource_group = container.last).first.created_at %>
+        <% date = Date.parse(date_time.to_s) %>
+          <h3><%= l(date, :format => :long ) %></h3>
+>>>>>>> upstream/rails2-stable
+          <ul>
+            <%= render :partial => "resource", :collection => resource_group %>
+          </ul>
+        <% end %>
+      <% else %>
+        <ul>
+          <%= render :partial => "resource", :collection => @resources %>
+        </ul>
+      <% end %>
+      <%= will_paginate @resources, :previous_label => '&laquo;', :next_label => '&raquo;' %>
+    <% else -%>
+      <p>
+<<<<<<< HEAD
+        <strong>There are no files yet. Click "Upload New Files" to add your first file.</strong>
+=======
+        <strong><%=t('.no_files_yet')%></strong>
+>>>>>>> upstream/rails2-stable
+      </p>
+    <% end -%>
+  <% end %>
+</div>

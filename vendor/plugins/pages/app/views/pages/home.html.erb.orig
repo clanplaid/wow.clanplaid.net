@@ -1,0 +1,5 @@
+<<<<<<< HEAD
+<%= render :partial => "/shared/content_page", :locals => {:show_submenu => false} %>
+=======
+<%= render :partial => "/shared/content_page" %>
+>>>>>>> upstream/rails2-stable

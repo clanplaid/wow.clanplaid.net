@@ -1,0 +1,11 @@
+@import url('refinery/application.css');
+<<<<<<< HEAD
+/*	
+	Override default refinery application CSS below. 
+	Formatting applies to all frontend.
+=======
+/*  
+  Override default refinery application CSS below. 
+  Formatting applies to all frontend.
+>>>>>>> upstream/rails2-stable
+*/

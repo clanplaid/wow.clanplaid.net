@@ -1,0 +1,11 @@
+@import url('refinery/formatting.css');
+<<<<<<< HEAD
+/*	
+	Override default refinery formatting below. 
+	Formatting applies to backend WYSIWYG editors and all frontend. 
+=======
+/*  
+  Override default refinery formatting below. 
+  Formatting applies to backend WYSIWYG editors and all frontend. 
+>>>>>>> upstream/rails2-stable
+*/

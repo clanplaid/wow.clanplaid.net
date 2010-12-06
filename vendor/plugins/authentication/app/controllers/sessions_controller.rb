@@ -1,12 +1,17 @@
 class SessionsController < ApplicationController
   layout 'admin'
   filter_parameter_logging 'password', 'password_confirmation'
+  before_filter :redirect?, :only => [:new, :create]
+  before_filter :redirect_to_new, :only => [:index, :show]
+
+  def new
+    @session = UserSession.new
+  end
 
   def create
-    @session = UserSession.new(params[:session])
-    if @session.save
+    if (@session = UserSession.create(params[:session])).valid?
+      flash[:notice] = t('sessions.login_successful') if refinery_user?
       redirect_back_or_default(admin_root_url)
-      flash[:notice] = "Logged in successfully"
     else
       render :action => 'new'
     end
@@ -14,12 +19,22 @@ class SessionsController < ApplicationController
 
   def destroy
     current_user_session.destroy if logged_in?
-    flash[:notice] = "You have been logged out."
-    redirect_back_or_default(new_session_url)
+
+    redirect_to(root_url)
   end
 
 protected
 
-  def take_down_for_maintenance?;end
+  def redirect?
+    if refinery_user?
+      redirect_to admin_root_url
+    elsif logged_in?
+      redirect_to root_url
+    end
+  end
+
+  def redirect_to_new
+    redirect_to :action => "new"
+  end
 
 end

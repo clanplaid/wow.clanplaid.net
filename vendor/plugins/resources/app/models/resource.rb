@@ -8,27 +8,27 @@ class Resource < ActiveRecord::Base
                  :max_size => MAX_SIZE_IN_MB.megabytes,
                  :path_prefix => (Refinery.s3_backend ? nil : 'public/system/resources')
 
+   # Docs for acts_as_indexed http://github.com/dougal/acts_as_indexed
+   acts_as_indexed :fields => [:filename, :title, :type_of_content]
+
   # we could use validates_as_attachment but it produces 4 odd errors like
   # "size is not in list". So we basically here enforce the same validation
   # rules here except display the error messages we want
   # This is a known problem when using attachment_fu
   def validate
     if self.filename.nil?
-      errors.add_to_base("You must choose a file to upload")
+      errors.add_to_base(I18n.translate('must_choose_file'))
     else
       [:size].each do |attr_name|
         enum = attachment_options[attr_name]
 
         unless enum.nil? || enum.include?(send(attr_name))
-          errors.add_to_base("Files should be smaller than #{MAX_SIZE_IN_MB} MB in size") if attr_name == :size
+          errors.add_to_base(I18n.translate('file_should_be_smaller_than_max_file_size',
+                              :max_file_size => ActionController::Base.helpers.number_to_human_size(MAX_SIZE_IN_MB.megabytes) ))
         end
       end
     end
   end
-
-  # Docs for acts_as_indexed http://github.com/dougal/acts_as_indexed
-  acts_as_indexed :fields => [:title, :type_of_content],
-                  :index_file => [Rails.root.to_s, "tmp", "index"]
 
   # when a dialog pops up with images, how many images per page should there be
   PAGES_PER_DIALOG = 12

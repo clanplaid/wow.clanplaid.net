@@ -1,9 +1,3 @@
-# Specifies gem version of Rails to use when vendor/rails is not present
-RAILS_GEM_VERSION = '2.3.5' unless defined? RAILS_GEM_VERSION
-
-# Specified gem version of Refinery to use when vendor/plugins/refinery/lib/refinery.rb is not present.
-REFINERY_GEM_VERSION = '0.9.6.24' unless defined? REFINERY_GEM_VERSION
-
 # Boot Rails
 require File.join(File.dirname(__FILE__), 'boot')
 
@@ -20,15 +14,22 @@ Refinery::Initializer.run do |config|
   # See Rails::Configuration for more options.
 
   config.action_controller.session = {
-    :session_key => '_refinery_session',
-    :secret      => 'eec8fffc3637c05895f8e6a355179eaad0003ac5617e5368955baf7989e1faca4d8ab37140d690c20b05d5815609b7c680c644277b6a892be316a85c6596d75c'
+    :key    => '_refinery_session',
+    :secret => 'eec8fffc3637c05895f8e6a355179eaad0003ac5617e5368955baf7989e1faca4d8ab37140d690c20b05d5815609b7c680c644277b6a892be316a85c6596d75c'
   }
 
-  # Specify your application's gem requirements here. See the examples below:
-  # config.gem "refinerycms-news", :lib => "news", :version => "~> 0.9.7"
-  # config.gem "refinerycms-portfolio", :lib => "portfolio", :version => "~> 0.9.3.8"
+  config.to_prepare do
+    # Here we set up the default acts_as_indexed configuration.
+    load(Rails.root.join('config', 'acts_as_indexed_config.rb').to_s)
+  end
+
 end
 
 # You can set things in the following file and we'll try hard not to destroy them in updates, promise.
 # Note: These are settings that aren't dependent on environment type. For those, use the files in config/environments/
 require Rails.root.join('config', 'settings.rb').to_s
+
+# Bundler has shown a weakness using Rails < 3 so we are going to
+# require these dependencies here until we can find another solution or until we move to
+# Rails 3.0 which should fix the issue (or until Bundler fixes the issue).
+require_dependency 'will_paginate'

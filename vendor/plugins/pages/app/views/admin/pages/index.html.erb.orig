@@ -1,0 +1,69 @@
+<div id='actions'>
+  <ul>
+    <li>
+      <%= render :partial => "/shared/admin/search", :locals => {:url => admin_pages_url} %>
+    </li>
+    <li>
+<<<<<<< HEAD
+      <%= link_to "Create New Page", new_admin_page_url, :class => "add_icon" %>
+    </li>
+  <% if Page.count > 1 and not searching? %>
+    <li>
+      <%= link_to "Reorder Pages", admin_pages_url, :id => "reorder_action", :class => "reorder_icon" %>
+      <%= link_to "Done Reordering Pages", admin_pages_url, :id => "reorder_action_done", :style => "display: none;", :class => "reorder_icon" %>
+=======
+      <%= link_to t('.create_new_page'), new_admin_page_url, :class => "add_icon" %>
+    </li>
+  <% if Page.count > 1 and not searching? %>
+    <li>
+      <%= link_to t('.reorder_pages'), admin_pages_url, :id => "reorder_action", :class => "reorder_icon" %>
+      <%= link_to t('.reorder_pages_done'), admin_pages_url, :id => "reorder_action_done", :style => "display: none;", :class => "reorder_icon" %>
+>>>>>>> upstream/rails2-stable
+    </li>
+  <% end %>
+  </ul>
+</div>
+<div id='records' class='tree'>
+  <% if searching? %>
+<<<<<<< HEAD
+    <% if @pages.any? %>
+      <h2>Search Results for "<%= params[:search] %>"</h2>
+      <ul id='sortable_list'>
+        <%= render :partial => "sortable_list" %>
+      </ul>
+    <% else %>
+      <p>
+        <strong>Sorry, no results found.</strong>
+      </p>
+    <% end %>
+  <% else %>
+    <% if @pages.any? %>
+      <ul id='sortable_list'>
+        <%= render :partial => "sortable_list" %>
+      </ul>
+    <% else %>
+      <p>
+        <strong>There are no pages yet.  Click "Create New Page" to add your first page.</strong>
+=======
+    <h2><%= t('admin.search_results_for', :query => h(params[:search])) %></h2>
+    <% if @pages.any? %>
+      <%= render :partial => "sortable_list" %>
+    <% else %>
+      <p><%= t('admin.search_no_results') %></p>
+    <% end %>
+  <% else %>
+    <% if @pages.any? %>
+      <%= render :partial => "sortable_list" %>
+    <% else %>
+      <p>
+        <strong><%=t('.no_pages_yet')%></strong>
+>>>>>>> upstream/rails2-stable
+      </p>
+    <% end %>
+  <% end %>
+</div>
+<<<<<<< HEAD
+<%= render :partial => "/shared/admin/make_sortable", :locals => {:tree => true } if Page.count > 1 %>
+=======
+<%= render :partial => "/shared/admin/make_sortable", :locals => {:tree => true} if Page.count > 1 %>
+>>>>>>> upstream/rails2-stable

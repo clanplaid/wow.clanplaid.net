@@ -1,0 +1,35 @@
+login: &login
+<<<<<<< HEAD
+  access_key_id: 
+  secret_access_key: 
+=======
+  access_key_id: <%= ENV['S3_KEY'] %>
+  secret_access_key: <%= ENV['S3_SECRET'] %>
+>>>>>>> upstream/rails2-stable
+
+development:
+  bucket_name: your_local_amazon_s3
+  <<: *login
+<<<<<<< HEAD
+  distribution_domain: 
+=======
+  distribution_domain: s3.amazonaws.com/your_local_amazon_s3
+>>>>>>> upstream/rails2-stable
+
+test:
+  bucket_name: your_test_amazon_s3
+  <<: *login
+<<<<<<< HEAD
+  distribution_domain: 
+=======
+  distribution_domain: s3.amazonaws.com/your_test_amazon_s3
+>>>>>>> upstream/rails2-stable
+
+production:
+  bucket_name: your_production_amazon_s3
+  <<: *login
+<<<<<<< HEAD
+  distribution_domain: 
+=======
+  distribution_domain: s3.amazonaws.com/your_production_amazon_s3
+>>>>>>> upstream/rails2-stable

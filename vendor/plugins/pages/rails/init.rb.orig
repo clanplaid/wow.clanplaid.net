@@ -1,0 +1,26 @@
+Refinery::Plugin.register do |plugin|
+  plugin.title = "Pages"
+<<<<<<< HEAD
+  plugin.description = "Manage content pages"
+  plugin.version = 1.0
+  plugin.menu_match = /admin\/page(_dialog|_part)?s$/
+=======
+  plugin.name = "refinery_pages"
+  plugin.directory = "pages"
+  plugin.description = "Manage content pages"
+  plugin.version = 1.0
+  plugin.menu_match = /(refinery|admin)\/page(_part)?s(_dialogs)?$/
+>>>>>>> upstream/rails2-stable
+  plugin.activity = {
+    :class => Page,
+    :url_prefix => "edit",
+    :title => "title",
+    :created_image => "page_add.png",
+    :updated_image => "page_edit.png"
+  }
+<<<<<<< HEAD
+=======
+  # this tells refinery where this plugin is located on the filesystem and helps with urls.
+  plugin.directory = directory
+>>>>>>> upstream/rails2-stable
+end

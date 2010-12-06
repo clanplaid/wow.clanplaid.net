@@ -1,0 +1,29 @@
+<<<<<<< HEAD
+<h2>Latest Activity</h2>
+<% if @recent_activity.any? %>
+  <table id='recent_activity'>
+    <% @recent_activity.each do |change| %>
+      <tr class='<%= cycle("on", "") %>'>
+        <%= activity_message_for change %>
+      </tr>
+    <% end %>
+  </table>
+<% else %>
+  <p>
+    Nothing has happened yet.
+  </p>
+<% end %>
+=======
+<div id='recent_activity'>
+  <h2><%= t('.latest_activity').titleize %></h2>
+  <ul class='clickable'>
+    <% @recent_activity.each do |change| %>
+      <% begin %>
+        <li class='<%= cycle("on", "on-hover", :name => 'recent_activity_cycle') %>'>
+          <%= activity_message_for change %>
+        </li>
+      <% rescue; end %>
+    <% end %>
+  </ul>
+</div>
+>>>>>>> upstream/rails2-stable

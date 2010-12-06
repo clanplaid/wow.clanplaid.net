@@ -1,0 +1,7 @@
+<%= render :partial => "form" %>
+<<<<<<< HEAD
+<div style='margin-top: 12px'>
+    <strong>Please note</strong> that you may need to restart the website for this setting to take effect.
+</div>
+=======
+>>>>>>> upstream/rails2-stable

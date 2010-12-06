@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/../test_helper'
+require File.expand_path(File.dirname(__FILE__) + '/../test_helper')
 require 'admin/dashboard_controller'
 
 class Admin::DashboardController; def rescue_action(e) raise e end; end
@@ -9,6 +9,7 @@ class DashboardControllerTest < ActionController::TestCase
 
   def setup
     @controller = Admin::DashboardController.new
+    users(:quentin).add_role(:refinery)
     login_as(:quentin)
   end
 

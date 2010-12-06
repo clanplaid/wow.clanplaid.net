@@ -1,0 +1,18 @@
+the_world:
+  content_type: image/gif
+  filename: The%20world!.gif
+  width: 614
+  height: 340
+  size: 17535
+<<<<<<< HEAD
+  # TODO: image_type? What's that used for?
+  
+=======
+
+>>>>>>> upstream/rails2-stable
+our_car:
+  content_type: image/jpg
+  filename: car-wallpapers19.jpg
+  width: 640
+  height: 300
+  size: 87647

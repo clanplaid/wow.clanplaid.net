@@ -1,0 +1,9 @@
+ActionController::Routing::Routes.draw do |map|
+<<<<<<< HEAD
+  map.namespace(:admin) do |admin|
+=======
+  map.namespace(:admin, :path_prefix => 'refinery') do |admin|
+>>>>>>> upstream/rails2-stable
+    admin.resources :images, :collection => {:insert => :get}
+  end
+end

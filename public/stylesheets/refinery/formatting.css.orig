@@ -1,0 +1,98 @@
+/* Default error colouring */
+
+<<<<<<< HEAD
+div.fieldWithErrors {
+	display: inline;
+}
+
+#errorExplanation {
+	border-top: 3px solid #F27F7F;
+	background: #FFBEBE;
+	padding: 10px;
+}
+
+#errorExplanation, #errorExplanation *, .fieldWithErrors, .fieldWithErrors * {
+	color: #9C2626;
+=======
+article, nav, header, footer, aside, hgroup, section{
+	display:block;
+}
+
+div.fieldWithErrors {
+  display: inline;
+}
+
+#errorExplanation {
+  border-top: 3px solid #F27F7F;
+  background: #FFBEBE;
+  padding: 10px;
+}
+
+#errorExplanation, #errorExplanation *, .fieldWithErrors, .fieldWithErrors * {
+  color: #9C2626;
+>>>>>>> upstream/rails2-stable
+}
+
+/* Browser Hacks */
+
+/* remove borders from images */
+
+a img {
+<<<<<<< HEAD
+	border: 0px none;
+=======
+  border: 0px none;
+>>>>>>> upstream/rails2-stable
+}
+
+/*
+Firefox Dotted Line Fix
+<<<<<<< HEAD
+	- http://sonspring.com/journal/removing-dotted-links
+*/
+a:focus {
+	outline: none;
+=======
+  - http://sonspring.com/journal/removing-dotted-links
+*/
+a:focus {
+  outline: none;
+>>>>>>> upstream/rails2-stable
+}
+
+/*
+Clearfix docs
+ - Main docs: http://positioniseverything.net/easyclearing.html
+ - IE7 change: http://www.456bereastreet.com/archive/200603/new_clearing_method_needed_for_ie7/
+*/
+.clearfix:after {
+<<<<<<< HEAD
+	content: ".";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+}
+.clearfix {
+	display: inline-block;
+=======
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+.clearfix {
+  display: inline-block;
+>>>>>>> upstream/rails2-stable
+}
+
+/* Hide from IE Mac \*/
+.clearfix {
+<<<<<<< HEAD
+	display:block;
+=======
+  display:block;
+>>>>>>> upstream/rails2-stable
+}
+/* End hide from IE Mac */
